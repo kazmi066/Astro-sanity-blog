@@ -1,0 +1,31 @@
+---
+import { useSanityClient } from 'astro-sanity';
+
+type Post = { title: string, slug: { current: string } }
+
+const posts = await useSanityClient().fetch(`*[_type == "post"]`);
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>My blog</title>
+	</head>
+	<body>
+		<h1>My blog</h1>
+		{
+			posts && <ul>
+				{
+					posts.map((post: Post) => (
+						<li>
+							<a href=`post/${post.slug.current}`>{post.title}</a>
+						</li>
+					))
+				}
+			</ul>
+		}
+	</body>
+</html>
