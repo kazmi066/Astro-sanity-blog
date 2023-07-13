@@ -1,0 +1,45 @@
+---
+import Logo from '@/images/logo.png';
+---
+<style>
+  .navbar {
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .navbar-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .navbar-logo {
+    object-fit: cover;
+  }
+
+  .navbar-link {
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+  }
+
+  .navbar-link:hover {
+    overflow: .8;
+    text-decoration: underline;
+  }
+
+  .navbar-link:first-child {
+    margin-right: 2rem;
+  }
+</style>
+
+<nav class="navbar">
+  <div class="container">
+    <div class="navbar-content">
+      <img src={Logo} alt="Logo" width="100" height="60" class="navbar-logo" />
+      <div class="navbar-links">
+        <a class="navbar-link" href="/about">About</a>
+        <a class="navbar-link" href="/blogs">Blogs</a>
+      </div>
+    </div>
+  </div>
+</nav>

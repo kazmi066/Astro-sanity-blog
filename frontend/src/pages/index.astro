@@ -1,31 +1,71 @@
 ---
 import { useSanityClient } from 'astro-sanity';
+import { urlForImage } from '@/sanity/urlForImage';
+import PageWrapper from '@/layouts/PageWrapper.astro';
 
-type Post = { title: string, slug: { current: string } }
+type Post = {
+	title: string,
+	slug: { current: string },
+	mainImage: {
+		_type: 'image',
+		asset: {
+			_ref: string,
+			_type: string
+		}
+	}
+}
 
 const posts = await useSanityClient().fetch(`*[_type == "post"]`);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>My blog</title>
-	</head>
-	<body>
-		<h1>My blog</h1>
+<style>
+	.page-title {
+		margin: 4rem 0 1rem;
+	}
+
+	.blogs-list {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 1rem;
+	}
+
+	.blog-post {
+		text-decoration: none;
+		color: unset;
+		overflow: hidden;
+	}
+
+	.blog-image {
+		width: 100%;
+		scale: 1.1;
+		object-fit: cover;
+	}
+
+	.blog-title {
+		font-size: 18px;
+		transition: all .3s ease;
+		font-weight: 500;
+	}
+
+	.blog-post:hover .blog-title {
+		transform: translateY(-4px);
+	}
+</style>
+
+<PageWrapper title="Home" description="Blog home page">
+	<div class="container">
+		<h1 class="page-title">Blogs</h1>
 		{
-			posts && <ul>
+			posts && <div class="blogs-list">
 				{
 					posts.map((post: Post) => (
-						<li>
-							<a href=`post/${post.slug.current}`>{post.title}</a>
-						</li>
+						<a class="blog-post" href={`post/${post.slug.current}`}>
+							<img class="blog-image" src={`${urlForImage(post.mainImage.asset).format('webp').url()}`} alt="Blog image" />
+							<h2 class="blog-title">{post.title}</h2>
+						</a>
 					))
 				}
 			</ul>
 		}
-	</body>
-</html>
+	</a>
+</PageWrapper>

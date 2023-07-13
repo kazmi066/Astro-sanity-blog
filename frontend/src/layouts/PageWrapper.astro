@@ -1,0 +1,43 @@
+---
+interface PageWrapperProps {
+	title: string,
+	description: string
+};
+
+import Navbar from '@/components/Navbar.astro';
+
+const { title, description } = Astro.props as PageWrapperProps;
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="description" content={description}>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
+		<title>{title}</title>
+	</head>
+	<style is:global>
+		body, html {
+			font-family: 'Montserrat', sans-serif;
+		}
+
+		.container {
+			max-width: 1000px;
+			margin: 0 auto;
+		}
+
+		.page-title {
+			text-transform: uppercase;
+			font-size: 28px;
+		}
+	</style>
+	<body>
+		<Navbar />
+		<slot />
+	</body>
+</html>
