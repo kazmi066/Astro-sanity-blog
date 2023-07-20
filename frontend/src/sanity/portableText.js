@@ -1,5 +1,3 @@
-// /my-blog/frontend/src/sanity/portableText.js
-
 import { portableTextToHtml } from 'astro-sanity';
 import { urlForImage } from './urlForImage';
 

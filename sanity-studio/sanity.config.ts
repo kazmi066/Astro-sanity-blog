@@ -7,7 +7,7 @@ export default defineConfig({
   name: 'default',
   title: 'astro-blog',
 
-  projectId: '',
+  projectId: '8v4lj4cg',
   dataset: 'production',
 
   plugins: [deskTool(), visionTool()],
